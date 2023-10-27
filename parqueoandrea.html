@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <!DOCTYPE html>
+<html>
+<head>
+    <title>Centro comercial, Parqueo la Bahia</title>
+    <link rel="stylesheet" type="text/css" href="fondonegro.css">
+</head>
+
+</html>
+
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=2.0">
+  <link rel="stylesheet" href="andreStyle.css">
+  <title>Centro comercial La bahia</title>
+</head>
+
+<body>
+  <div class="imagen-container">
+    <img class="animacion" src="https://cdn-icons-png.flaticon.com/512/9149/9149134.png" alt="Centro comercial La bahia">
+  </div>
+</body>
+
+
+
+<head> 
+    <title>Centro Comercial-Pago de Estacionamiento</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 598px;
+            margin: 0 auto;
+            padding: 50px;
+            border: 78px solid #ffffff;
+            border-radius: 20px;
+        }
+        
+    </style>
+</head>
+<body>
+    
+
+<body>
+    <div class="container">
+       <center> <p style="color:rgb(255, 255, 255); font-size: 50px"> 𝑪𝒆𝒏𝒕𝒓𝒐 𝒄𝒐𝒎𝒆𝒓𝒄𝒊𝒂𝒍 𝒍𝒂 𝑩𝒂𝒉𝒊𝒂</p></center>
+        <center><p style="color:rgb(255, 255, 255); font-size: 49px"> 𝑷𝒂𝒈𝒐 𝒅𝒆 𝒆𝒔𝒕𝒂𝒄𝒊𝒐𝒏𝒂𝒎𝒊𝒆𝒏𝒕𝒐</p> </center>
+
+       <center> <p style="color:rgb(250, 216, 216); font-size: 39px"> Ingrese el codigo de siete digitos que esta en la tarjeta  </p>
+        <form id="parkingForm"> </center>
+
+            <label for="ticketNumber">Número de Ticket:</label>
+            <input type="text" id="ticketNumber" required pattern="\d{7}">
+            <br><br>
+
+            <label for="parkingTime">Tiempo de Estadía (minutos):</label>
+            <input type="number" id="parkingTime" required min="0">
+            <br><br>
+            
+           <DIV><label for="paymentType">Tipo de Pago:</label>
+            <select id="paymentType" required>
+                <option value="efectivo">Efectivo</option>
+                <option value="tarjeta">Tarjeta</option>
+                </select> </DIV> 
+                <br><br>
+
+
+            <div id="paymentDetails" style="display: none;">
+                <label for="billValue">Valor del Billete:</label>
+                <select id="billValue">
+                    <option value="5">Q5</option>
+                    <option value="10">Q10</option>
+                    <option value="20">Q20</option>
+                    <option value="50">Q50</option>
+                    <option value="100">Q100</option>
+                </select>
+                <br><br>
+                <p id="changeAmount"></p>
+            </div>
+            <p id="paymentResult"></p>
+            <br><br>
+
+
+            <button type="submit">Realizar Pago</button>
+            <form id="parkingForm">
+            </form>
+    </nav>
+    
+    <script>
+        const form = document.getElementById("parkingForm");
+        const ticketNumberInput = document.getElementById("ticketNumber");
+        const parkingTimeInput = document.getElementById("parkingTime");
+        const ticketId = document.getElementById("ticketeId");
+        const paymentTypeSelect = document.getElementById("paymentType");
+        const paymentDetails = document.getElementById("paymentDetails");
+        const billValueSelect = document.getElementById("billValue");
+        const changeAmount = document.getElementById("changeAmount");
+        const paymentResult = document.getElementById("paymentResult");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const ticketNumber = ticketNumberInput.value;
+            const parkingTime = parseFloat(parkingTimeInput.value);
+            const paymentType = paymentTypeSelect.value;
+
+            if (!ticketNumber.match(/^\d{7}$/)) {
+                alert("Número de ticket no válido. Debe tener 7 dígitos.");
+                
+            }
+
+            if (parkingTime < 16) {
+                paymentResult.textContent = "El tiempo de estadía es menor a 15 minutos. No aplica pago.";
+                return 0;
+            }
+
+            let totalToPay;
+            if (parkingTime % 30 === 0) {
+                totalToPay = parkingTime / 30 * 7;
+                totalToPay = parkingTime / 60 * 10;
+                
+            } else {
+                totalToPay = Math.ceil(parkingTime / 60) * 10;
+                totalToPay = Math.ceil(parkingTime / 30) * 7;
+                
+            }
+            
+
+            if (paymentType === "efectivo") {
+                const billValue = parseInt(billValueSelect.value);
+                if (billValue >= totalToPay) {
+                    const change = billValue - totalToPay;
+                    changeAmount.textContent = `Monto a devolver: Q${change}`;
+                    paymentResult.textContent = "Proceso realizado con éxito.";
+                    return 0;
+                } else {
+                    changeAmount.textContent = "";
+                    paymentResult.textContent = "El billete seleccionado es insuficiente. Introduce un billete mayor.";
+                    
+                }
+            } else {
+                changeAmount.textContent = "";
+                paymentResult.textContent = "Proceso realizado con exito"
+                
+            }
+
+            paymentDetails.style.display = "none";
+            
+        });
+
+        paymentTypeSelect.addEventListener("change", function () {
+            if (paymentTypeSelect.value === "efectivo") {
+                paymentDetails.style.display = "block";
+            } else {
+                paymentDetails.style.display = "none";
+                
+            }
+        });
+    </script>
+</body>
+</html>
